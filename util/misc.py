@@ -429,7 +429,10 @@ def init_distributed_mode(args):
         os.environ['LOCAL_SIZE'] = str(torch.cuda.device_count())
     elif 'SLURM_PROCID' in os.environ:
         proc_id = int(os.environ['SLURM_PROCID'])
-        ntasks = int(os.environ['SLURM_NTASKS'])
+        try:
+            ntasks = int(os.environ['SLURM_NTASKS'])
+        except:
+            ntasks = 1
         node_list = os.environ['SLURM_NODELIST']
         num_gpus = torch.cuda.device_count()
         addr = subprocess.getoutput(
