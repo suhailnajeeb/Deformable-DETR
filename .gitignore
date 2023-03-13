@@ -1,6 +1,7 @@
-# Ignore Pycache files
-
-*__pycache__
+# Ignore cache files
+__pycache__/
+ckps/
+.DS_Store
 
 # Ignore the custom operators
 models/ops/*
