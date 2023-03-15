@@ -3,6 +3,19 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from pathlib import Path, PurePath
+import torch
+from models import build_model
+
+country_shorthands = {
+    'China_Drone': 'CD',
+    'China_MotorBike': 'CM',
+    'Czech': 'CZ',
+    'India': 'IN',
+    'Japan': 'JP',
+    'Norway': 'NW',
+    'United_States': 'US',
+    'combined': 'holdout'
+}
 
 def plot_logs(logs, fields, ewm_col = 0, log_name = 'log.txt'):
     # set style
@@ -37,3 +50,9 @@ def plot_logs(logs, fields, ewm_col = 0, log_name = 'log.txt'):
     #    ax.legend([Path(p).name for p in logs])
         ax.set_title(field)
     return fig, axs
+
+def load_model_from_ckp(ckp_path):
+    model, criterion, postprocessors = build_model(ArgsModel())
+    model.load_state_dict(torch.load(ckp_path, map_location='cpu')['model'])
+    model.eval();
+    return model
