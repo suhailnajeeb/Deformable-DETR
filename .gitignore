@@ -5,3 +5,11 @@ ckps/
 
 # Ignore the custom operators
 models/ops/*
+
+# Ignore the outputs 
+out/
+*.out
+
+# Ignore the slurm/shell files
+*.slurm
+*.sh
