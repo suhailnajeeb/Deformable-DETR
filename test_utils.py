@@ -51,8 +51,9 @@ def plot_logs(logs, fields, ewm_col = 0, log_name = 'log.txt'):
         ax.set_title(field)
     return fig, axs
 
-def load_model_from_ckp(ckp_path):
-    model, criterion, postprocessors = build_model(ArgsModel())
-    model.load_state_dict(torch.load(ckp_path, map_location='cpu')['model'])
+def load_model_from_ckp(ckp_path, args):
+    model, criterion, postprocessors = build_model(args)
+    checkpoint = torch.load(ckp_path, map_location = 'cpu')
+    model.load_state_dict(checkpoint['model'])
     model.eval();
-    return model
+    return model, criterion, postprocessors

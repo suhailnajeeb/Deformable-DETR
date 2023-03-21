@@ -143,9 +143,9 @@ def get_args_parser():
 
 def main(args):
     device = torch.device(args.device)
-    model_path = args.output_dir + 'checkpoint.pth'
+    model_path = args.output_dir
 
-    model, criterion, postprocessors = load_model_from_ckp(model_path)
+    model, criterion, postprocessors = load_model_from_ckp(model_path, args)
 
     model.to(device)
     criterion.to(device)

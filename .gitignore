@@ -13,3 +13,6 @@ out/
 # Ignore the slurm/shell files
 *.slurm
 *.sh
+
+# Ignore scores
+scores/*.csv
